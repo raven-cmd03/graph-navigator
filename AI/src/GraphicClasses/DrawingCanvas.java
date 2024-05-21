@@ -114,7 +114,6 @@ public class DrawingCanvas extends JPanel implements MouseListener , MouseMotion
                         for(Integer i : searchPath)
                         {
                             buttonList.get(i).setColor(Color.green);
-                            System.out.println(i);
                         }
                         searched = true;
                         clear();
