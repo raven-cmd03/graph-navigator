@@ -66,10 +66,6 @@ public class AntColony
                 {
                     pathLength = a.getPathSize();
                     bestpath = a.getPathList();
-                    for(Integer z : bestpath)
-                    {
-                        System.out.println(z);
-                    }
                 }
                 if(a.getDeadEnd() && a.getCurent() != destination)
                 {
