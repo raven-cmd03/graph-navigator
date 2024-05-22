@@ -25,6 +25,8 @@ public class AntColony
         maxIterations = 10;
         bestpath = new ArrayList<>();
         pathLength = Integer.MAX_VALUE;
+        alpha = 0.9f;
+        beta = 0.1f;
         generatePheromones();
         generateAnts();
     }

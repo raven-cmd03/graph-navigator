@@ -61,7 +61,7 @@ public class Ant
 
     public float sum(int weight , float pheromoneLevel)
     {
-        float f = (float)(Math.pow(1/weight, beta) * Math.pow(pheromoneLevel, alpha));
+        float f = (float)(Math.pow(1.0f/weight, beta) * Math.pow(pheromoneLevel, alpha));
         return f;
     }
 
