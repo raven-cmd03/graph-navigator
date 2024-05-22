@@ -6,7 +6,6 @@ import java.util.Random;
 public class Ant 
 {
     private ArrayList<Integer> pathList;
-    private int pathSize;
     private float beta;
     private float alpha;
     private int[][] graph;
@@ -24,7 +23,6 @@ public class Ant
         pathList = new ArrayList<>();
         this.current = current;
         this.destination = destination;
-        pathSize = 0;
         deadEnd = false;
     }
     
@@ -51,7 +49,6 @@ public class Ant
                 target = target - sum(graph[indexes.get(i)][current], pheromoneLevel[indexes.get(i)][current]);
                 if (target <= 0) 
                 {
-                    pathSize += graph[indexes.get(i)][current];
                     return indexes.get(i);   
                 }
             }
@@ -91,10 +88,5 @@ public class Ant
     public boolean getDeadEnd()
     {
         return deadEnd;
-    }
-
-    public int getPathSize()
-    {
-        return pathSize;
     }
 }

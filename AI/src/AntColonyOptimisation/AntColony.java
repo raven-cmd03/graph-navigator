@@ -64,9 +64,9 @@ public class AntColony
                 {
                     a.move();
                 }
-                if(!a.getDeadEnd() && a.getCurent() == destination && a.getPathSize() < pathLength)
+                if(!a.getDeadEnd() && a.getCurent() == destination && a.getPathList().size() < pathLength)
                 {
-                    pathLength = a.getPathSize();
+                    pathLength = a.getPathList().size();
                     bestpath = a.getPathList();
                 }
                 if(a.getDeadEnd() && a.getCurent() != destination)
@@ -90,7 +90,7 @@ public class AntColony
             ArrayList<Integer> path = a.getPathList();
             for(int i = 0 ; i < path.size() - 1 ; i++)
             {
-                pheromoneLevel[path.get(i)][path.get(i+1)] += 1.0f/pathLength;
+                pheromoneLevel[path.get(i)][path.get(i+1)] += 1.0f/path.size();
             }
         }
     }
