@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import A_Star.Astar;
+import A_Star.Node;
 import AntColonyOptimisation.AntColony;
 import GraphClasses.Edge;
 import GraphClasses.Graph;
@@ -125,17 +127,17 @@ public class DrawingCanvas extends JPanel implements MouseListener , MouseMotion
                     }
                     else if (count != -1 && b.getSelected() && edgePair[0] != buttonList.indexOf(b))
                     {
-                        AntColony aco = new AntColony(graph.getWeights(), edgePair[0], buttonList.indexOf(b));
-                        aco.run();
-                        ArrayList<Integer> searchPath = aco.getBestPath();
-                        for(Integer i : searchPath)
+                        Astar astar = new Astar(graph, this, edgePair[0], buttonList.indexOf(b));
+                        astar.run();
+                        ArrayList<Node> searchPath = astar.getClosed();
+                        for(Node n : searchPath)
                         {
-                            buttonList.get(i).setColor(Color.green);
+                            buttonList.get(n.getSelf()).setColor(Color.green);
                         }
                         searched = true;
                         clear();
                         count = -1;
-                        searchACO.setSelected(false);
+                        searchAStar.setSelected(false);
                         break;
                     }
                 }

@@ -1,10 +1,11 @@
+package A_Star;
 import java.util.ArrayList;
 
 import GraphClasses.Edge;
 import GraphClasses.Graph;
 import GraphicClasses.DrawingCanvas;
 
-public class AStar
+public class Astar
 {
     private ArrayList<Node> open;
     private ArrayList<Node> closed;
@@ -12,7 +13,7 @@ public class AStar
     private DrawingCanvas canvas;
     private int destination;
 
-    public AStar(Graph graph , DrawingCanvas canvas , int start , int destination)
+    public Astar(Graph graph , DrawingCanvas canvas , int start , int destination)
     {
         this.graph = graph;
         this.canvas = canvas;
