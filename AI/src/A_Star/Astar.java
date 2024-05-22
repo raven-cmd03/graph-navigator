@@ -37,10 +37,16 @@ public class Astar
             {
                 if(n.getF() < max)
                 {
+                    max = n.getF();
                     q = n;
                 }
             }
             open.remove(q);
+            if(q.getSelf() == this.destination)
+            {
+                closed.add(q);
+                break;
+            }
             ArrayList<Edge> tempEdge = graph.getAdjacencyList().get(q.getSelf());
             ArrayList<Node> tempNode = new ArrayList<>();
             for(Edge e : tempEdge)
