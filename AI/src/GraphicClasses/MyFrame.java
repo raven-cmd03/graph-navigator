@@ -10,7 +10,7 @@ public class MyFrame extends JFrame
     public MyFrame()
     {
         add(new DrawingCanvas(new Graph()));
-        setName("Graph");
+        setTitle("Graph");
         setSize(1000, 1000);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
