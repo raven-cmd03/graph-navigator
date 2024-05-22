@@ -38,4 +38,14 @@ public class Edge
         g.setColor(Color.BLACK);
         g.drawLine(b1.getPoint().getX(), b1.getPoint().getY(), b2.getPoint().getX(), b2.getPoint().getY());
     }
+
+    public int f(int home , int destination)
+    {
+        return (weight + distance(home, destination));
+    }
+
+    private int distance(int x, int y)
+    {
+        return (int)Math.sqrt(Math.pow(this.home -x, 2) + Math.pow(this.destination - y, 2));
+    }
 }

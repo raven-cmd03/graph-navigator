@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import AntColonyOptimisation.AntColony;
-import GraphClasses.*;
+import GraphClasses.Edge;
+import GraphClasses.Graph;
 
 public class DrawingCanvas extends JPanel implements MouseListener , MouseMotionListener
 {
@@ -20,7 +21,8 @@ public class DrawingCanvas extends JPanel implements MouseListener , MouseMotion
     private int[] edgePair;
     private int count;
     private boolean select;
-    private Button search;
+    private Button searchACO;
+    private Button searchAStar;
     private boolean searched;
 
     public DrawingCanvas(Graph graph)
@@ -34,7 +36,8 @@ public class DrawingCanvas extends JPanel implements MouseListener , MouseMotion
         edgePair = new int[1];
         count = -1;
         select = false;
-        search = new Button(new Point(100, 100), Color.green);
+        searchACO = new Button(new Point(900, 100), Color.green);
+        searchAStar = new Button(new Point(900, 200), Color.pink);
         searched = false;
         initialiseListeners();
     }
@@ -72,19 +75,32 @@ public class DrawingCanvas extends JPanel implements MouseListener , MouseMotion
             }
             b.draw(g);
         }
-        if(search.getHover())
+        if(searchACO.getHover())
         {
-            search.setColor(Color.red);
+            searchACO.setColor(Color.red);
         }
-        else if(search.getSelected())
+        else if(searchACO.getSelected())
         {
-            search.setColor(Color.black);
+            searchACO.setColor(Color.black);
         }
         else
         {
-            search.setColor(Color.green);
+            searchACO.setColor(Color.green);
         }
-        search.draw(g);
+        if(searchAStar.getHover())
+        {
+            searchAStar.setColor(Color.red);
+        }
+        else if(searchAStar.getSelected())
+        {
+            searchAStar.setColor(Color.black);
+        }
+        else
+        {
+            searchAStar.setColor(Color.pink);
+        }
+        searchAStar.draw(g);
+        searchACO.draw(g);
         repaint();
     }
 
@@ -93,8 +109,9 @@ public class DrawingCanvas extends JPanel implements MouseListener , MouseMotion
     {
         if(!searched)
         {
-            search.clicked(e.getX(), e.getY());
-            if(search.getSelected())
+            searchAStar.clicked(e.getX(), e.getY());
+            searchACO.clicked(e.getX(), e.getY());
+            if(searchAStar.getSelected())
             {
                 for(Button b : buttonList)
                 {
@@ -118,7 +135,36 @@ public class DrawingCanvas extends JPanel implements MouseListener , MouseMotion
                         searched = true;
                         clear();
                         count = -1;
-                        search.setSelected(false);
+                        searchACO.setSelected(false);
+                        break;
+                    }
+                }
+            }
+            else if(searchACO.getSelected())
+            {
+                for(Button b : buttonList)
+                {
+                    b.clicked(e.getX(), e.getY());
+                    if(count == -1 && b.getSelected())
+                    {
+                        count++;
+                        edgePair[count] = buttonList.indexOf(b);
+                        b.setSelected(true);
+                        break;
+                    }
+                    else if (count != -1 && b.getSelected() && edgePair[0] != buttonList.indexOf(b))
+                    {
+                        AntColony aco = new AntColony(graph.getWeights(), edgePair[0], buttonList.indexOf(b));
+                        aco.run();
+                        ArrayList<Integer> searchPath = aco.getBestPath();
+                        for(Integer i : searchPath)
+                        {
+                            buttonList.get(i).setColor(Color.green);
+                        }
+                        searched = true;
+                        clear();
+                        count = -1;
+                        searchACO.setSelected(false);
                         break;
                     }
                 }
@@ -195,7 +241,8 @@ public class DrawingCanvas extends JPanel implements MouseListener , MouseMotion
     {
         if(!searched)
         {
-            search.isHover(e.getX(), e.getY());
+            searchACO.isHover(e.getX(), e.getY());
+            searchAStar.isHover(e.getX(), e.getY());
             if(!buttonList.isEmpty())
             {
                 for(Button b : buttonList)

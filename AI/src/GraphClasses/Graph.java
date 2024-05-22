@@ -63,4 +63,9 @@ public class Graph
          }
          return weights;
      }
+
+     public ArrayList<ArrayList<Edge>> getAdjacencyList()
+     {
+         return adjacencyList;
+     }
 }
