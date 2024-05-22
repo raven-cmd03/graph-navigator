@@ -31,6 +31,7 @@ public class Astar
     {
         while (!open.isEmpty())
         {
+            boolean found = false;
             int max = Integer.MAX_VALUE;
             Node q = null;
             for(Node n : open)
@@ -58,6 +59,7 @@ public class Astar
                 if(n.getSelf() == destination)
                 {
                     closed.add(n);
+                    found = true;
                     break;
                 }
                 else
@@ -76,7 +78,15 @@ public class Astar
                     }
                 }
             }
-            closed.add(q);
+            if(found)
+            {
+                closed.add(q);
+                break;
+            }
+            else
+            {
+                closed.add(q);
+            }
         }
     }
 
@@ -107,5 +117,10 @@ public class Astar
     public ArrayList<Node> getClosed()
     {
         return closed;
+    }
+
+    public void cleanList()
+    {
+
     }
 }
