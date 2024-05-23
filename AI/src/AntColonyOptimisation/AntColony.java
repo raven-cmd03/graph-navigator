@@ -31,6 +31,9 @@ public class AntColony
         generateAnts();
     }
 
+    /*
+     * method to generate pheromone table. 
+     */
     private void generatePheromones()
     {
         pheromoneLevel = new float[graph.length][graph.length];
@@ -43,6 +46,9 @@ public class AntColony
         }
     }
 
+    /*
+     * method to generate ants for each iteration cycle.
+     */
     public void generateAnts()
     {
         ants = new ArrayList<>();
@@ -52,25 +58,31 @@ public class AntColony
         }
     }
 
+    /*
+     * method that runs the ant colony optimisation.
+     */
     public void run()
     {
+        // for loop to run iterations of the optimisation.
         for(int i = 0 ; i < maxIterations ; i++)
         {
-            ArrayList<Ant> toRemove = new ArrayList<>();
+            ArrayList<Ant> toRemove = new ArrayList<>(); // array list to store ants to be removed that have reached a dead end.
             generateAnts();
             for(Ant a : ants)
             {
                 while (a.getCurent() != destination && !a.getDeadEnd())
                 {
-                    a.move();
+                    a.move(); // move ants while they have not reached their deestination.
                 }
                 if(!a.getDeadEnd() && a.getCurent() == destination && a.getPathList().size() < pathLength)
                 {
+                    // if this ant has the best path yet assign the bestpath and pathlength accordingly.
                     pathLength = a.getPathList().size();
                     bestpath = a.getPathList();
                 }
                 if(a.getDeadEnd() && a.getCurent() != destination)
                 {
+                    // add ants to be removed.
                     toRemove.add(a);
                 }
             }
@@ -78,11 +90,14 @@ public class AntColony
             {
                 ants.remove(a);
             }
-            evaporate();
-            depositPheromones();
+            evaporate(); // evaporate pheromone on every index of pheromone table.
+            depositPheromones(); // deposit pheromones where ants have travelled and found the goal.
         }
     }
 
+    /**
+     * method to deposit pheromones where ants have travelled.
+     */
     public void depositPheromones()
     {
         for(Ant a : ants)
@@ -100,6 +115,9 @@ public class AntColony
         return bestpath;
     }
 
+    /**
+     * method to evaporate pheromones on every position.
+     */
     public void evaporate()
     {
         for(int i = 0 ; i < pheromoneLevel.length ; i++)
