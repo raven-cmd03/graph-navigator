@@ -74,10 +74,10 @@ public class AntColony
                 {
                     a.move(); // move ants while they have not reached their deestination.
                 }
-                if(!a.getDeadEnd() && a.getCurent() == destination && a.getPathList().size() < pathLength)
+                if(!a.getDeadEnd() && a.getCurent() == destination && a.getPathList().size() < pathLength) // if we want path with least weight
                 {
                     // if this ant has the best path yet assign the bestpath and pathlength accordingly.
-                    pathLength = a.getPathList().size();
+                    pathLength = a.getPathList().size(); // change this to pathlength = a.getPathLength
                     bestpath = a.getPathList();
                 }
                 if(a.getDeadEnd() && a.getCurent() != destination)
