@@ -12,6 +12,7 @@ public class Ant
     private float[][] pheromoneLevel;
     private int current;
     private int destination;
+    private int pathLength;
     private boolean deadEnd;
 
     public Ant(float alpha , float beta , int[][] graph , float[][] pheromoneLevel , int current , int destination)
@@ -24,6 +25,7 @@ public class Ant
         this.current = current;
         this.destination = destination;
         deadEnd = false;
+        pathLength = 0;
     }
     
     /**
@@ -53,6 +55,7 @@ public class Ant
                 target = target - sum(graph[indexes.get(i)][current], pheromoneLevel[indexes.get(i)][current]); // roullete wheel implementation.
                 if (target <= 0) 
                 {
+                    pathLength += graph[indexes.get(i)][current]; // store path length in case we want aco to return path with least weight
                     return indexes.get(i);   
                 }
             }
@@ -92,5 +95,10 @@ public class Ant
     public boolean getDeadEnd()
     {
         return deadEnd;
+    }
+
+    public int getPathLength()
+    {
+        return pathLength;
     }
 }
