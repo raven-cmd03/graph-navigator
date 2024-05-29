@@ -20,11 +20,7 @@ public class Astar
         this.destination = destination;
         open = new ArrayList<>();
         closed = new ArrayList<>();
-        ArrayList<Edge> list = graph.getAdjacencyList().get(start);
-        for(Edge e : list)
-        {
-            open.add(new Node(graph, canvas, e.getHome(), e.getDestination(), destination));
-        }
+        open.add(new Node(graph, canvas, start, start, destination));
     }
 
     public void run()
