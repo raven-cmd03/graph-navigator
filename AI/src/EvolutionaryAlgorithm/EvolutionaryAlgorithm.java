@@ -9,7 +9,6 @@ import GraphClasses.Graph;
 
 public class EvolutionaryAlgorithm {
     private Graph graph;
-    private DrawingCanvas canvas;
     private int start;
     private int end;
     private int populationSize;
@@ -19,7 +18,6 @@ public class EvolutionaryAlgorithm {
 
     public EvolutionaryAlgorithm(Graph graph, DrawingCanvas canvas, int start, int end, int populationSize, int generations, double mutationRate) {
         this.graph = graph;
-        this.canvas = canvas;
         this.start = start;
         this.end = end;
         this.populationSize = populationSize;

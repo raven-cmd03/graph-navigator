@@ -60,6 +60,7 @@ public class Astar
             }
             for(Node n : tempNode)
             {
+                comparisons++;
                 if(n.getSelf() == destination)
                 {
                     closed.add(n);
@@ -127,6 +128,7 @@ public class Astar
 
     public ArrayList<Node> getClosed()
     {
+        System.out.println("Comparisons : " + comparisons);
         return closed;
     }
 
