@@ -25,8 +25,8 @@ public class AntColony
         maxIterations = 10;
         bestpath = new ArrayList<>();
         pathLength = Integer.MAX_VALUE;
-        alpha = 0.9f;
-        beta = 0.1f;
+        alpha = 0.5f;
+        beta = 0.5f;
         generatePheromones();
         generateAnts();
     }
@@ -63,6 +63,7 @@ public class AntColony
      */
     public void run()
     {
+        double start = System.currentTimeMillis();
         // for loop to run iterations of the optimisation.
         for(int i = 0 ; i < maxIterations ; i++)
         {
@@ -93,6 +94,8 @@ public class AntColony
             evaporate(); // evaporate pheromone on every index of pheromone table.
             depositPheromones(); // deposit pheromones where ants have travelled and found the goal.
         }
+        double end = System.currentTimeMillis();
+        System.out.println("Time taken is : " + (end - start) + " Alpha is : " + alpha + " Beta is : " + beta);
     }
 
     /**

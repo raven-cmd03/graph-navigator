@@ -20,7 +20,14 @@ public class Node
         this.parent = parent;
         this.self = self;
         this.destination = destination;
-        this.h = canvas.getDistance(self, destination);
+        if(self == destination)
+        {
+            h = 0;
+        }
+        else
+        {
+            this.h = canvas.getDistance(self, destination);
+        }
         ArrayList<Edge> list = graph.getAdjacencyList().get(parent);
         for(Edge e : list)
         {

@@ -9,6 +9,8 @@ public class Astar
 {
     private ArrayList<Node> open;
     private ArrayList<Node> closed;
+    private ArrayList<Integer> visited;
+    private int comparisons;
     private Graph graph;
     private DrawingCanvas canvas;
     private int destination;
@@ -20,7 +22,12 @@ public class Astar
         this.destination = destination;
         open = new ArrayList<>();
         closed = new ArrayList<>();
-        open.add(new Node(graph, canvas, start, start, destination));
+        visited = new ArrayList<>();
+        ArrayList<Edge> list = graph.getAdjacencyList().get(start);
+        for(Edge e : list)
+        {
+            open.add(new Node(graph, canvas, e.getHome(), e.getDestination(), destination));
+        }
     }
 
     public void run()
@@ -38,6 +45,7 @@ public class Astar
                     q = n;
                 }
             }
+            visited.add(q.getSelf());
             open.remove(q);
             if(q.getSelf() == this.destination)
             {
@@ -70,7 +78,14 @@ public class Astar
                     }
                     else
                     {
-                        open.add(n);
+                        if(visited.contains(n.getSelf()))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            open.add(n);
+                        }
                     }
                 }
             }

@@ -28,24 +28,25 @@ public class DrawingCanvas extends JPanel implements MouseListener, MouseMotionL
     private int[] edgePair;
     private int count;
     private boolean select;
-    private Button searchACO;
-    private Button searchAStar;
-    private Button searchEA; // New button for Evolutionary Algorithm
+    private SquareButton searchACO;
+    private SquareButton searchAStar;
+    private SquareButton searchEA; // New button for Evolutionary Algorithm
     private boolean searched;
 
     public DrawingCanvas(Graph graph) {
         this.graph = graph;
         setSize(1000, 1000);
-        setBackground(Color.gray);
+        Color c = new Color(53, 57, 53);
+        setBackground(c);
         setVisible(true);
         buttonList = new ArrayList<>();
         edges = new ArrayList<>();
         edgePair = new int[1];
         count = -1;
         select = false;
-        searchACO = new Button(new Point(900, 100), Color.green);
-        searchAStar = new Button(new Point(900, 200), Color.pink);
-        searchEA = new Button(new Point(900, 300), Color.yellow); // Initialize the new button
+        searchACO = new SquareButton(new Point(900, 100), Color.green);
+        searchAStar = new SquareButton(new Point(900, 200), Color.pink);
+        searchEA = new SquareButton(new Point(900, 300), Color.yellow); // Initialize the new button
         searched = false;
         initialiseListeners();
         readCoordinatesFromFile("C:\\Users\\Aaraiz Masood\\OneDrive\\Desktop\\graph-navigator\\AI\\src\\GraphicClasses\\coordinates");
@@ -95,9 +96,9 @@ public class DrawingCanvas extends JPanel implements MouseListener, MouseMotionL
         } else {
             searchEA.setColor(Color.yellow);
         }
-        searchAStar.draw(g);
-        searchACO.draw(g);
-        searchEA.draw(g); // Draw the new button
+        searchAStar.draw(g,"A Star");
+        searchACO.draw(g, "ACO");
+        searchEA.draw(g, "Evo"); // Draw the new button
         repaint();
     }
 

@@ -29,7 +29,7 @@ public class Edge {
     }
 
     public void drawEdge(Graphics g, Button b1, Button b2) {
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         g.drawLine(b1.getPoint().getX(), b1.getPoint().getY(), b2.getPoint().getX(), b2.getPoint().getY());
     }
 
