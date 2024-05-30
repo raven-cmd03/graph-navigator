@@ -67,7 +67,8 @@ public class DrawingCanvas extends JPanel implements MouseListener, MouseMotionL
             if (!searched) {
                 if (b.getHover()) {
                     b.setColor(Color.RED);
-                } else if (b.getSelected()) {
+                } else if (b.getSelected()) 
+                {
                     b.setColor(Color.red);
                 } else {
                     b.setColor(Color.blue);
