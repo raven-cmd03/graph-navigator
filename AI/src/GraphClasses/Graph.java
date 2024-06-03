@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Graph {
+public class Graph 
+{
     private ArrayList<ArrayList<Edge>> adjacencyList;
     private Map<Integer, int[]> vertexCoordinates;
 
